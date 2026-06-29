@@ -88,3 +88,26 @@ ALTER TABLE comment ADD CONSTRAINT FK_board_TO_comment
 
 CREATE USER 'developer'@'*' IDENTIFIED BY 'mysql@1234';
 
+
+
+CREATE OR REPLACE VIEW board_list_view AS
+SELECT
+    B.board_number AS board_number,
+    B.title AS title,
+    B.content AS content,
+    I.image AS title_image,
+    B.favorite_count AS favorite_count,
+    B.comment_count AS comment_count,
+    B.view_count AS view_count,
+    B.write_datetime AS write_datetime,
+    B.writer_email AS writer_email,
+    U.nickname AS writer_nickname,
+    U.profile_image AS writer_profile_image
+FROM board AS B
+         INNER JOIN user AS U
+                    ON B.writer_email = U.email
+         LEFT JOIN (SELECT board_number, ANY_VALUE(image) AS image FROM image GROUP BY board_number) AS I
+                   ON B.board_number = I.board_number;
+
+select * from board_list_view;
+
