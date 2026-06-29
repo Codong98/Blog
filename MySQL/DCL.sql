@@ -1,3 +1,3 @@
 GRANT SELECT, UPDATE, DELETE, INSERT
 ON blog.*
-TO 'developer'@'*';
+TO 'developer'@'%';

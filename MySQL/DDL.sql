@@ -86,7 +86,7 @@ ALTER TABLE comment ADD CONSTRAINT FK_board_TO_comment
         REFERENCES board (board_number);
 
 
-CREATE USER 'developer'@'*' IDENTIFIED BY 'mysql@1234';
+CREATE USER 'developer'@'%' IDENTIFIED BY 'mysql@1234';
 
 
 
